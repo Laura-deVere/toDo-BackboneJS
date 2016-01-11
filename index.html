@@ -16,13 +16,27 @@
     <body>
         <script src="js/lib/jquery-min.js"></script>
         <script src="js/lib/underscore-min.js"></script>
+        <script src="js/lib/mustache.js"></script>
         <script src="js/lib/backbone-min.js"></script>
 
         <script type="text/javascript" src="js/todoItem.js"></script>
         <script type="text/javascript" src="js/todoItems.js"></script>
-        <script type="text/javascript" src="todoItemView.js"></script>
+        <script type="text/javascript" src="js/todoItemView.js"></script>
         <script type="text/javascript" src="js/todoItemsView.js"></script>
 
         <script src="js/main.js"></script>
+        <script type="text/html" id="todoItemTemplate">
+            <label>
+                <input type="checkbox" {{#completed}}checked{{/completed}} id="toggle"></input>
+                {{title}}
+            </label>
+            <button id="delete">Delete</button>
+        </script>
+        <script type="text/html" id="todoItemsTemplate">
+            <header id="addNewTodoItem">
+                <input type="text" autofocus id="newTodoItem" placeholder="What next?"></input>
+            </header>
+            <ul id="todoItems"></ul>
+        </script>
     </body>
 </html>

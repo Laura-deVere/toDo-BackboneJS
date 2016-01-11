@@ -9,21 +9,28 @@ var TodoItemView = Backbone.View.extend({
 	},
 
 	events: {
-		"click #toggle": "onClickToggle"
+		"click #toggle": "onClickToggle",
+		"click #delete": "onClickDelete"
+	},
+
+	onClickDelete: function(){
+		this.model.destroy();
 	},
 
 		// get the value, invert it, and store it in itself
-		onClickToggle: function(){
+	onClickToggle: function(){
 		this.model.toggle();
+		this.model.save();
 		console.log(this.model.toJSON());
 	},
 
 	render: function(){
-		this.$el.toggleClass("completed", this.model.get("isCompleted"));
+		this.$el.attr("id", this.model.id);
+		this.$el.toggleClass("completed", this.model.get("completed"));
 
-		var checked = this.model.get("isCompleted") ? "checked" : "";
+		var checked = this.model.get("completed") ? "checked" : "";
 		// get value of completed property and if checked render checked attribute
-		this.$el.html("<input id='toggle' type='checkbox'" + checked +"></input>" + this.model.escape("description"));
+		this.$el.html("<input id='toggle' type='checkbox'" + checked +"></input>" + this.model.escape("title") + "<button id='delete'>'Delete'</button>");
 
 		return this;
 	}
